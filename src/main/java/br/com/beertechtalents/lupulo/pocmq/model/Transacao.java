@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -22,8 +23,14 @@ public class Transacao {
     @Enumerated(EnumType.STRING)
     private TipoTransacao tipo;
 
-    @Column(length = 15, precision = 2, nullable = false)
+    @Column(precision=16, scale=2, nullable = false)
     private BigDecimal valor;
+
+    @Column(nullable = false)
+    private UUID contaCorrenteOrigem;
+
+    @Column(nullable = false)
+    private UUID contaCorrenteDestino;
 
     @CreatedDate
     private Timestamp datahora;

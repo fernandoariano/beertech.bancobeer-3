@@ -23,20 +23,11 @@ public class TransacaoController {
 
     final TransacaoService transacaoService;
 
-    @ApiOperation(value = "Busca saldo total", nickname = "GET", notes = "Busca o saldo total", response = BigDecimal.class, tags = {"tool",})
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "successful operation", response = BigDecimal.class),
-            @ApiResponse(code = 400, message = "Invalid status value")})
-    @GetMapping
-    public ResponseEntity<BigDecimal> getSaldo() {
-        return new ResponseEntity<>(transacaoService.buscarSaldo(), HttpStatus.OK);
-    }
-
     @ApiOperation(value = "Adiciona uma nova transacao", nickname = "POST", notes = "", tags = {"transacao",})
     @ApiResponses(value = {
             @ApiResponse(code = 405, message = "Invalid input")})
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public void novaOperacao(@ApiParam(value = "Tool object that needs to be added", required = true) @RequestBody Transacao body) {
+    public void novaOperacao(@ApiParam(value = "Nova transação entre contas", required = true) @RequestBody Transacao body) {
 
         // Normalizar entrada
         if(body.getTipo().equals(TipoTransacao.SAQUE)) {
