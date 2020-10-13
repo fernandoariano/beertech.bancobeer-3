@@ -4,11 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -16,12 +14,13 @@ import java.util.UUID;
 @Entity
 @Data
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class Saldo {
 
     @Id
-    @Column(columnDefinition = "BINARY(16)")
-    public UUID contaHash;
+    @Column(columnDefinition = "VARBINARY(16)")
+    private UUID contaHash;
 
-    public BigDecimal valor;
+    private BigDecimal valor;
 }

@@ -5,14 +5,14 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.UUID;
-
 @Data
 @Builder
-public class Transferencia {
+public class TransacaoRequest {
+
+
+    private TipoTransacao tipo;
 
     private BigDecimal valor;
 
-    private UUID hashContaDe;
-
-    private UUID hashContaPara;
+    private UUID contaHash;
 }

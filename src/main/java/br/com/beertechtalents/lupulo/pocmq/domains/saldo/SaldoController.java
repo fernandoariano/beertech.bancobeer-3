@@ -13,24 +13,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 @Controller
 @RequestMapping("/saldos")
-@Api(value = "Endpoints para saldos")
+@Api(value = "Endpoints para saldos", tags = {"Saldos",})
 @RequiredArgsConstructor
 @Slf4j
 public class SaldoController {
 
     final SaldoService saldoService;
 
-    @ApiOperation(value = "Busca saldo total", nickname = "GET", notes = "Busca o saldo total", response = BigDecimal.class, tags = {"tool",})
+    @ApiOperation(value = "Busca saldo pelo hash da conta", nickname = "GET", notes = "Busca o saldo total pelo hash da conta", response = Saldo.class, tags = {"Saldos",})
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "successful operation", response = BigDecimal.class),
+            @ApiResponse(code = 200, message = "successful operation", response = Saldo.class),
             @ApiResponse(code = 400, message = "Invalid status value")})
     @GetMapping(path = "/{hash}")
-    public ResponseEntity<BigDecimal> getSaldoByHash(@PathVariable UUID hash) {
-        return new ResponseEntity<>(saldoService.buscarSaldo(hash), HttpStatus.OK);
+    public ResponseEntity<Object> getSaldoByHash(@PathVariable UUID hash) {
+        Saldo saldo = saldoService.buscarSaldo(hash);
+        return ResponseEntity.ok(saldo);
     }
 }
